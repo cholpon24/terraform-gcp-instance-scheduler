@@ -17,5 +17,5 @@ variable "label_value" {
 }
 
 variable "scheduler_function_bucket" {
-  default = "gcf-sources-205237336028-us-central12346578421"
+  default = "gcf-sources-205237336028-us-central21"
 }

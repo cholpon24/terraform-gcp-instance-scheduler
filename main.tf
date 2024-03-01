@@ -5,11 +5,11 @@ provider "google" {
 }
 
 resource "google_pubsub_topic" "topic" {
-  name = "instance-scheduler-topic12348473"
+  name = "instance-scheduler-topic123484273"
 }
 
 resource "google_cloud_scheduler_job" "job" {
-  name        = "instance-scheduler1236473"
+  name        = "instance-scheduler12364735"
   description = "Cloud Scheduler to turn off labeled VMs to save on cost and reduce risk."
   schedule    = var.cron_pattern
 
@@ -60,12 +60,12 @@ resource "google_storage_bucket_object" "archive" {
 # }
 
 resource "google_cloudfunctions_function" "function" {
-  name                  = "instance-scheduler-function123575"
+  name                  = "instance-scheduler-function1235754"
   description           = "Cloud function to do the heavy lifting"
   available_memory_mb   = 128
   source_archive_bucket = "${google_storage_bucket.bucket.name}"
   source_archive_object = "${google_storage_bucket_object.archive.name}"
-  runtime               = "python37"
+  runtime               = "python38"
 
   event_trigger {
     event_type = "google.pubsub.topic.publish"
