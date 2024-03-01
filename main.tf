@@ -30,31 +30,31 @@ resource "google_storage_bucket_object" "archive" {
   source = "gcp/function.zip"
 }
 
-resource "google_service_account" "sa" {
-  account_id   = "instance-scheduler-srv-accnt"
-  display_name = "instance-scheduler-srv-accnt1"
-}
+# resource "google_service_account" "sa" {
+#   account_id   = "instance-scheduler-srv-accnt"
+#   display_name = "instance-scheduler-srv-accnt1"
+# }
 
-resource "google_project_iam_custom_role" "sa_custom_role" {
-  role_id     = "instance.scheduler"
-  title       = "Instance Scheduler Role"
-  description = "Ability to turn off instances with a specific label at a specific time."
-  permissions = [
-    "compute.instances.list",
-    "compute.instances.stop",
-    "compute.zones.list",
-  ]
-}
+# resource "google_project_iam_custom_role" "sa_custom_role" {
+#   role_id     = "instance.scheduler"
+#   title       = "Instance Scheduler Role"
+#   description = "Ability to turn off instances with a specific label at a specific time."
+#   permissions = [
+#     "compute.instances.list",
+#     "compute.instances.stop",
+#     "compute.zones.list",
+#   ]
+# }
 
-resource "google_project_iam_member" "sa-iam-member" {
-  project = var.project
-  role    = "projects/${var.project}/roles/${google_project_iam_custom_role.sa_custom_role.role_id}"
-  member  = "serviceAccount:${google_service_account.sa.email}"
+# resource "google_project_iam_member" "sa-iam-member" {
+#   project = var.project
+#   role    = "projects/${var.project}/roles/${google_project_iam_custom_role.sa_custom_role.role_id}"
+#   member  = "serviceAccount:${google_service_account.sa.email}"
 
-  depends_on = [
-    google_service_account.sa
-  ]
-}
+#   depends_on = [
+#     google_service_account.sa
+#   ]
+# }
 
 resource "google_cloudfunctions_function" "function" {
   name                  = "instance-scheduler-function1"
