@@ -1,5 +1,5 @@
 variable "project" {
-  default = "<insert projectid here>"
+  default = "project-1"
 }
 
 # set to every day, at 18:00 hourds (6pm)
@@ -17,5 +17,5 @@ variable "label_value" {
 }
 
 variable "scheduler_function_bucket" {
-  default = "<insert bucket name here>"
+  default = "gcf-sources-205237336028-us-central1"
 }
