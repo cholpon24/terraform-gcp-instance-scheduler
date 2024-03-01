@@ -5,11 +5,11 @@ provider "google" {
 }
 
 resource "google_pubsub_topic" "topic" {
-  name = "instance-scheduler-topic"
+  name = "instance-scheduler-topic1"
 }
 
 resource "google_cloud_scheduler_job" "job" {
-  name        = "instance-scheduler"
+  name        = "instance-scheduler1"
   description = "Cloud Scheduler to turn off labeled VMs to save on cost and reduce risk."
   schedule    = var.cron_pattern
 
@@ -32,7 +32,7 @@ resource "google_storage_bucket_object" "archive" {
 
 resource "google_service_account" "sa" {
   account_id   = "instance-scheduler-srv-accnt"
-  display_name = "instance-scheduler-srv-accnt"
+  display_name = "instance-scheduler-srv-accnt1"
 }
 
 resource "google_project_iam_custom_role" "sa_custom_role" {
@@ -57,7 +57,7 @@ resource "google_project_iam_member" "sa-iam-member" {
 }
 
 resource "google_cloudfunctions_function" "function" {
-  name                  = "instance-scheduler-function"
+  name                  = "instance-scheduler-function1"
   description           = "Cloud function to do the heavy lifting"
   available_memory_mb   = 128
   source_archive_bucket = "${google_storage_bucket.bucket.name}"
