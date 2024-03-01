@@ -5,7 +5,7 @@ provider "google" {
 }
 
 resource "google_pubsub_topic" "topic" {
-  name = "instance-scheduler-topic1"
+  name = "instance-scheduler-topic12"
 }
 
 resource "google_cloud_scheduler_job" "job" {
