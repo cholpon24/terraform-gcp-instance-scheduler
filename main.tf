@@ -74,14 +74,14 @@ resource "google_cloudfunctions_function" "function" {
 
   timeout               = 120
   entry_point           = "instance_scheduler_start"
-  service_account_email = google_service_account.sa.email
+  service_account_email = "service-205237336028@gcp-sa-cloudscheduler.iam.gserviceaccount.com"
 
   environment_variables = {
     PROJECT     = var.project
     LABEL_KEY   = var.label_key
     LABEL_VALUE = var.label_value
   }
-  depends_on = [
-    google_service_account.sa
-  ]
+  # depends_on = [
+  #   google_service_account.sa
+  # ]
 }
