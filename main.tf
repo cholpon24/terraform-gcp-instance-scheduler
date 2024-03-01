@@ -5,11 +5,11 @@ provider "google" {
 }
 
 resource "google_pubsub_topic" "topic" {
-  name = "instance-scheduler-topic12348"
+  name = "instance-scheduler-topic123484"
 }
 
 resource "google_cloud_scheduler_job" "job" {
-  name        = "instance-scheduler1236"
+  name        = "instance-scheduler12364"
   description = "Cloud Scheduler to turn off labeled VMs to save on cost and reduce risk."
   schedule    = var.cron_pattern
 
@@ -31,7 +31,7 @@ resource "google_storage_bucket_object" "archive" {
 }
 
 resource "google_service_account" "sa" {
-  account_id   = "instance-scheduler-srv-accnt"
+  account_id   = "instance-scheduler-srv-accnt1"
   display_name = "instance-scheduler-srv-accnt123"
 }
 
@@ -44,6 +44,8 @@ resource "google_project_iam_custom_role" "sa_custom_role" {
     "compute.instances.stop",
     "compute.zones.list",
     "iam.serviceAccountUser",
+    "iam.serviceAccountUser",
+    
   ]
 }
 
@@ -75,14 +77,16 @@ resource "google_cloudfunctions_function" "function" {
 
   timeout               = 120
   entry_point           = "instance_scheduler_start"
-  service_account_email = "service-205237336028@gcp-sa-cloudscheduler.iam.gserviceaccount.com"
+  service_account_email = google_service_account.sa.email
+
+  
 
   environment_variables = {
     PROJECT     = var.project
     LABEL_KEY   = var.label_key
     LABEL_VALUE = var.label_value
   }
-  # depends_on = [
-  #   google_service_account.sa
-  # ]
+  depends_on = [
+    google_service_account.sa
+  ]
 }
