@@ -1,5 +1,5 @@
 variable "project" {
-  default = "project-1"
+  default = "project-1-360620"
 }
 
 # set to every day, at 18:00 hourds (6pm)
