@@ -21,6 +21,7 @@ resource "google_cloud_scheduler_job" "job" {
 
 resource "google_storage_bucket" "bucket" {
   name = var.scheduler_function_bucket
+  location = "US"
 }
 
 resource "google_storage_bucket_object" "archive" {
